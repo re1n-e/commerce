@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<h2>Create Listing</h2>
+
+<form action="{% url 'createListing' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="">
+        {% if message1 %}
+        <p class="text-danger">{{ message1 }}</p>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="descriptionInput" name="description" placeholder="">
+        <small id="description" class="form-text text-muted">Enter a brief description of your product</small>
+        {% if message2 %}
+        <p class="text-danger">{{ message2 }}</p>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" name="category" class="form-control">
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category }}</option>
+            {% endfor %}
+        </select>
+        <small id="category" class="form-text text-muted">Select a category</small>
+    </div>
+    
+    <div class="form-group">
+        <label for="imageurl">Image url</label>
+        <input type="url" class="form-control" id="imageurlInput" name="imageurl" placeholder="">
+        <small id="imageurl" class="form-text text-muted">Enter a url for your product if any</small>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" name="price" placeholder="">
+        <small id="price" class="form-text text-muted">Enter the price for your product</small>
+        {% if message3 %}
+        <p class="text-danger">{{ message3 }}</p>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

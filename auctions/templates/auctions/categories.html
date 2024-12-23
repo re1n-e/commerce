@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<ul>
+    {% for c in cat %}
+    <li>
+        <form action="{% url 'categories' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="cat_id" value="{{ c.id }}">
+            <button type="submit" class="btn btn-link" style="text-decoration: none;">{{ c }}</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

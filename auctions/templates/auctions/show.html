@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% for listing in listings %}
+    <div class="container border-bottom">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ listing.Image_url }}" class="img-fluid" alt="{{listing.Title}}" width="300" height="200">
+            </div>
+            <div class="col-md-6">
+                <h2>{{ listing.Title }}</h2>
+                <p><strong>Price: </strong> ${{ listing.Price }}</p>
+                <p><strong>Description: </strong> {{ listing.Description }}</p>
+                <form action="{% url 'view_listing' listing.id %}" method="GET">
+                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                    <input type="submit" value="View" class="btn btn-primary btn-sm">
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
